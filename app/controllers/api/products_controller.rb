@@ -1,37 +1,40 @@
 class Api::ProductsController < ApplicationController
-  def display_all
+  def index
     @products = Product.all
-    render "display_all.json.jb"
+    render "index.json.jb"
   end
 
-  def display_product_query
-    @product = Product.find_by(id: "#{params["id"].to_i}")
-    render "display_one.json.jb"
+  def create
+    @product = Product.create({
+      id: params["id"],
+      title: params["title"],
+      author: params["author"],
+      image_url: params["image_url"],
+      description: params["description"],
+      price: params["price"],
+    })
+    render "show.json.jb"
   end
 
-  # def display_hobbit
-  #   @product = Product.find_by(title: "The Hobbit")
-  #   render "display_one.json.jb"
-  # end
+  def show
+    @product = Product.find_by(id: params["id"])
+    render "show.json.jb"
+  end
 
-  # def display_cider
-  #   @product = Product.find_by(title: "The Cider House Rules")
-  #   render "display_one.json.jb"
-  # end
+  def update
+    @product = Product.find_by(id: params["id"])
+    @product.title = params["title"] || @product.title
+    @product.author = params["author"] || @product.author
+    @product.image_url = params["image_url"] || @product.image_url
+    @product.description = params["description"] || @product.description
+    @product.price = params["price"] || @product.price
+    @product.save
+    render "show.json.jb"
+  end
 
-  # def display_jim
-  #   @product = Product.find_by(title: "The New Jim Crow")
-  #   render "display_one.json.jb"
-  # end
-
-  # def display_nations
-  #   @product = Product.find_by(title: "American Nations: A History of the Eleven Rival Regional Cultures of North America")
-  #   render "display_one.json.jb"
-  # end
-
-  # def display_first
-  #   @product = Product.first
-  #   render "display_one.json.jb"
-  # end
-
+  def destroy
+    @product = Product.find_by(id: params["id"])
+    @product.destroy
+    render json: { message: "Product deleted!" }
+  end
 end
