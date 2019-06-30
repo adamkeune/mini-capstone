@@ -12,4 +12,3 @@ Rails.application.routes.draw do
     delete "/products/:id" => "products#destroy"
   end
 end
-2
