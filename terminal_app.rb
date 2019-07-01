@@ -18,12 +18,12 @@ while true
     books = response.parse
     # pp books
     books.map do |book|
-      puts "ID: #{book[:id]}"
-      puts "Title: #{book[:title]}"
-      puts "Author: #{book[:author]}"
-      puts "Image: #{book[:image_url]}"
-      puts "Price: #{book[:price]}"
-      puts "Description: #{book[:description]}"
+      puts "ID: #{book["id"]}"
+      puts "Title: #{book["title"]}"
+      puts "Author: #{book["author"]}"
+      puts "Image: #{book["image_url"]}"
+      puts "Price: #{book["price"]}"
+      puts "Description: #{book["description"]}"
       puts
     end
   elsif choice == "2"
@@ -31,27 +31,27 @@ while true
     id = gets.chomp
     response = HTTP.get("http://localhost:3000/api/products/#{id}")
     book = response.parse
-    puts "ID: #{book[:id]}"
-    puts "Title: #{book[:title]}"
-    puts "Author: #{book[:author]}"
-    puts "Image: #{book[:image_url]}"
-    puts "Price: #{book[:price]}"
-    puts "Description: #{book[:description]}"
+    puts "ID: #{book["id"]}"
+    puts "Title: #{book["title"]}"
+    puts "Author: #{book["author"]}"
+    puts "Image: #{book["image_url"]}"
+    puts "Price: #{book["price"]}"
+    puts "Description: #{book["description"]}"
     puts
   elsif choice == "3"
     puts "Please enter product ID to be updated"
     id = gets.chomp.to_i
     params = {}
     puts "Please enter new title (or return to skip)"
-    params[:title] = gets.chomp
+    params["title"] = gets.chomp
     puts "Please enter new author (or return to skip)"
-    params[:author] = gets.chomp
+    params["author"] = gets.chomp
     puts "Please enter new image URL (or return to skip)"
-    params[:image_url] = gets.chomp
+    params["image_url"] = gets.chomp
     puts "Please enter new price (or return to skip)"
-    params[:price] = gets.chomp.to_i
+    params["price"] = gets.chomp.to_i
     puts "Please enter new description (or return to skip)"
-    params[:description] = gets.chomp
+    params["description"] = gets.chomp
 
     params = params.delete_if { |_key, value| value.empty? }
 
@@ -96,15 +96,15 @@ while true
   elsif choice == "4"
     params = {}
     puts "Please enter new title"
-    params[:title] = gets.chomp
+    params["title"] = gets.chomp
     puts "Please enter new author"
-    params[:author] = gets.chomp
+    params["author"] = gets.chomp
     puts "Please enter new image URL"
-    params[:image_url] = gets.chomp
+    params["image_url"] = gets.chomp
     puts "Please enter new price"
-    params[:price] = gets.chomp.to_i
+    params["price"] = gets.chomp.to_i
     puts "Please enter new description"
-    params[:description] = gets.chomp
+    params["description"] = gets.chomp
 
     response = HTTP.post("http://localhost:3000/api/products", :form => params)
     book = response.parse
@@ -120,7 +120,7 @@ while true
     response = HTTP.delete("http://localhost:3000/products/#{id}")
     # puts "Product deleted!"
     data = response.parse
-    p data[:message]
+    p data["message"]
   elsif choice.downcase == "q"
     break
   else

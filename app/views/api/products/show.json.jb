@@ -1,11 +1,1 @@
-{
-  id: @product.id,
-  title: @product.title,
-  author: @product.author,
-  image_url: @product.image_url,
-  description: @product.description,
-  price: @product.price,
-  discounted: @product.is_discounted?,
-  tax: @product.tax,
-  total: @product.total,
-}
+render partial: "product.json.jb", locals: { product: @product }

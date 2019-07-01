@@ -9,6 +9,7 @@ class Api::ProductsController < ApplicationController
       id: params["id"],
       title: params["title"],
       author: params["author"],
+      isbn: params["isbn"],
       image_url: params["image_url"],
       description: params["description"],
       price: params["price"],
