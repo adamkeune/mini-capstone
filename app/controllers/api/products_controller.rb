@@ -4,11 +4,13 @@ class Api::ProductsController < ApplicationController
 
     if params[:search]
       @products = @products.where("title ILIKE ? OR author ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
-      @products = @products.order(id: :asc)
-    elsif params[:discount]
+    end
+
+    if params[:discount]
       @products = @products.where("price <= ?", 10)
-      @products = @products.order(price: :asc)
-    elsif params[:sort] == "price"
+    end
+
+    if params[:sort] == "price"
       if params[:sort_order] == "desc"
         @products = @products.order(price: :desc)
       else
