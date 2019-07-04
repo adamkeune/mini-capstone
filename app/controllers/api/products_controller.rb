@@ -29,12 +29,12 @@ class Api::ProductsController < ApplicationController
       title: params["title"],
       author: params["author"],
       isbn: params["isbn"],
-      image_url: params["image_url"],
       description: params["description"],
       price: params["price"],
     })
 
     if @product.save
+      @product.images = Image.create(url: params["image_url"], product_id: @product.id)
       render "show.json.jb"
     else
       render json: { errors: @product.errors.full_messages }, status: 422
@@ -50,7 +50,7 @@ class Api::ProductsController < ApplicationController
     @product = Product.find_by(id: params["id"])
     @product.title = params["title"] || @product.title
     @product.author = params["author"] || @product.author
-    @product.image_url = params["image_url"] || @product.image_url
+    @product.images = Image.create(url: params["image_url"], product_id: @product.id) || @product.images
     @product.description = params["description"] || @product.description
     @product.price = params["price"] || @product.price
 

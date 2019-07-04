@@ -7,6 +7,20 @@ class Product < ApplicationRecord
     Supplier.find_by(id: supplier_id)
   end
 
+  def images
+    Image.where(product_id: id)
+    # @images.map { |i|  }
+  end
+
+  def images=(input)
+    if @images == nil
+      @images = []
+      @images << input
+    else
+      @images << input
+    end
+  end
+
   def is_discounted?
     # if price < 10
     #   true

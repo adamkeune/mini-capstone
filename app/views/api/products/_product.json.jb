@@ -3,7 +3,7 @@
   title: product.title,
   author: product.author,
   isbn: product.isbn,
-  image_url: product.image_url,
+  images: product.images,
   description: product.description,
   price: product.price,
   discounted: product.is_discounted?,
