@@ -24,20 +24,25 @@ class Api::ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new({
-      id: params["id"],
-      title: params["title"],
-      author: params["author"],
-      isbn: params["isbn"],
-      description: params["description"],
-      price: params["price"],
-    })
+    if current_user
+      @product = Product.new({
+        id: params["id"],
+        title: params["title"],
+        author: params["author"],
+        isbn: params["isbn"],
+        description: params["description"],
+        price: params["price"],
+        supplier_id: params["supplier"],
+      })
 
-    if @product.save
-      @product.images = Image.create(url: params["image_url"], product_id: @product.id)
-      render "show.json.jb"
+      if @product.save
+        @product.images = Image.create(url: params["image_url"], product_id: @product.id)
+        render "show.json.jb"
+      else
+        render json: { errors: @product.errors.full_messages }, status: 422
+      end
     else
-      render json: { errors: @product.errors.full_messages }, status: 422
+      render json: {}, status: :unauthorized
     end
   end
 
@@ -47,23 +52,32 @@ class Api::ProductsController < ApplicationController
   end
 
   def update
-    @product = Product.find_by(id: params["id"])
-    @product.title = params["title"] || @product.title
-    @product.author = params["author"] || @product.author
-    @product.images = Image.create(url: params["image_url"], product_id: @product.id) || @product.images
-    @product.description = params["description"] || @product.description
-    @product.price = params["price"] || @product.price
+    if current_user
+      @product = Product.find_by(id: params["id"])
+      @product.title = params["title"] || @product.title
+      @product.author = params["author"] || @product.author
+      @product.images = Image.create(url: params["image_url"], product_id: @product.id) || @product.images
+      @product.description = params["description"] || @product.description
+      @product.price = params["price"] || @product.price
+      @product.supplier_id = params["supplier"] || @product.supplier_id
 
-    if @product.save
-      render "show.json.jb"
+      if @product.save
+        render "show.json.jb"
+      else
+        render json: { errors: @product.errors.full_messages }, status: 422
+      end
     else
-      render json: { errors: @product.errors.full_messages }, status: 422
+      render json: {}, status: :unauthorized
     end
   end
 
   def destroy
-    @product = Product.find_by(id: params["id"])
-    @product.destroy
-    render json: { message: "Product deleted!" }
+    if current_user
+      @product = Product.find_by(id: params["id"])
+      @product.destroy
+      render json: { message: "Product deleted!" }
+    else
+      render json: {}, status: :unauthorized
+    end
   end
 end

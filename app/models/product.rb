@@ -1,16 +1,20 @@
 class Product < ApplicationRecord
   validates :title, presence: true
-  validates :price, presence: true, numericality: { greater_than: 0 }
+  validates :price, numericality: { greater_than: 0 }
   validates :description, length: { in: (10..500) }
 
-  def supplier
-    Supplier.find_by(id: supplier_id)
-  end
+  belongs_to :supplier
+  # def supplier
+  #   Supplier.find_by(id: supplier_id)
+  # end
 
-  def images
-    Image.where(product_id: id)
-    # @images.map { |i|  }
-  end
+  has_many :images
+  # def images
+  #   Image.where(product_id: id)
+  #   # @images.map { |i|  }
+  # end
+
+  has_many :orders
 
   def images=(input)
     if @images == nil
