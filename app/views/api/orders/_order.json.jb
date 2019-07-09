@@ -1,7 +1,6 @@
 {
   id: order.id,
-  product_id: order.product_id,
-  product: { title: order.product.title },
+  product: order.product,
   quantity: order.quantity,
   subtotal: order.subtotal,
   tax: order.tax,
