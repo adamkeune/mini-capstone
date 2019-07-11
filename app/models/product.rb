@@ -11,10 +11,11 @@ class Product < ApplicationRecord
   has_many :images
   # def images
   #   Image.where(product_id: id)
-  #   # @images.map { |i|  }
   # end
 
   has_many :orders
+  has_many :category_products
+  has_many :categories, through: :category_products
 
   def images=(input)
     if @images == nil

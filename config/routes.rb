@@ -8,9 +8,9 @@ Rails.application.routes.draw do
     get "/orders" => "orders#index"
     get "/orders/:id" => "orders#show"
 
-    post "/users" => "users#create"
+    post "/users" => "users#create" # sign-up
 
-    post "/sessions" => "sessions#create"
+    post "/sessions" => "sessions#create" # log-in
 
     get "/products" => "products#index"
     post "/products" => "products#create"
