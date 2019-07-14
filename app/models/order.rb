@@ -1,18 +1,17 @@
 class Order < ApplicationRecord
+  has_many :carted_products
+  has_many :products, through: :carted_products
   belongs_to :user
-  belongs_to :product
 
-  validates :quantity, numericality: { greater_than: 0 }
+  # def subtotal
+  #   # product.price * quantity
+  # end
 
-  def subtotal
-    product.price * quantity
-  end
+  # def tax
+  #   # subtotal * 0.09
+  # end
 
-  def tax
-    subtotal * 0.09
-  end
-
-  def total
-    subtotal + tax
-  end
+  # def total
+  #   # subtotal + tax
+  # end
 end
