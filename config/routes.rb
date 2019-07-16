@@ -1,17 +1,10 @@
 Rails.application.routes.draw do
-
-  # EXAMPLE HTML ROUTE
-  # get "/photos" => "photos#index"
+  get "/products" => "products#index"
+  get "/products/new" => "products#new"
+  post "/products" => "products#create"
+  get "/products/:id" => "products#show"
 
   namespace :api do
-    get "/carted_products" => "carted_products#index"
-    post "/carted_products" => "carted_products#create"
-    delete "/carted_products/:id" => "carted_products#destroy"
-
-    post "/orders" => "orders#create"
-    get "/orders" => "orders#index"
-    get "/orders/:id" => "orders#show"
-
     post "/users" => "users#create" # sign-up
     post "/sessions" => "sessions#create" # log-in
 
@@ -26,5 +19,13 @@ Rails.application.routes.draw do
     get "/suppliers/:id" => "suppliers#show"
     patch "/suppliers/:id" => "suppliers#update"
     delete "/suppliers/:id" => "suppliers#destroy"
+
+    get "/carted_products" => "carted_products#index"
+    post "/carted_products" => "carted_products#create"
+    delete "/carted_products/:id" => "carted_products#destroy"
+
+    get "/orders" => "orders#index"
+    post "/orders" => "orders#create"
+    get "/orders/:id" => "orders#show"
   end
 end

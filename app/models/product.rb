@@ -19,14 +19,14 @@ class Product < ApplicationRecord
   has_many :users, through: :carted_products
   has_many :orders, through: :carted_products
 
-  def images=(input)
-    if @images == nil
-      @images = []
-      @images << input
-    else
-      @images << input
-    end
-  end
+  # def images=(input)
+  #   if @images == nil
+  #     @images = []
+  #     @images << input
+  #   else
+  #     @images << input
+  #   end
+  # end
 
   def is_discounted?
     # if price < 10

@@ -2,6 +2,7 @@
   id: carted_product.id,
   product: carted_product.product,
   status: carted_product.status,
-  product_id: carted_product.product_id,
+  # product_id: carted_product.product_id,
   quantity: carted_product.quantity,
+  order_id: carted_product.order_id,
 }

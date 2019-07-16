@@ -1,0 +1,19 @@
+<h1>New Title</h1>
+
+<form action="/products" method="POST">
+  <p>Title: <input type="text" name="title"></p>
+  <p>Author: <input type="text" name="author"></p>
+  <p>Description: <input type="text" name="description"></p>
+  <p>ISBN: <input type="text" name="isbn"></p>
+  <p>Price: <input type="number" name="price"></p>
+  <p>Image URLs: </p>
+  <p><input type="text" name="url"></p>
+  <p>Supplier: 
+    <select name="supplier_id" id="">
+    <% @suppliers.each do |supplier| %>
+      <option value="<%= supplier.id %>"><%= supplier.name %></option>
+    <% end %>
+    </select>
+  </p>
+  <input type="submit" name="" value="Add Book">
+</form>

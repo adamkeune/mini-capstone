@@ -29,11 +29,12 @@ class Api::OrdersController < ApplicationController
       render json: { errors: @order.errors.full_messages }
     end
 
-    carted_products.each do |carted_product|
-      carted_product.status = "Purchased"
-      carted_product.order_id = @order.id
-      carted_product.save # DON'T FORGET TO SAVE!!!
-    end
+    carted_products.update_all(status: "Purchased", order_id: @order.id) # Rails method available for following block:
+    # carted_products.each do |carted_product|
+    #   carted_product.status = "Purchased"
+    #   carted_product.order_id = @order.id
+    #   carted_product.save # DON'T FORGET TO SAVE!!!
+    # end
   end
 
   def index

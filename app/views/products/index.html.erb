@@ -1,0 +1,12 @@
+<% @products.each do |product| %>
+  <h3>Title: <%= product.title %></h3>
+  <h3>Author: <%= product.author %></h3>
+  <p><%= product.description %></p>
+  <p>ISBN: <%= product.isbn %></p>
+  <p>Price: $<%= product.price %></p>
+  <!-- <% product.images.each do |image| %>
+    <img src="<%= image.url %>" width="200" height="300" />
+  <% end %> -->
+  <br> 
+  <a href="/products/<%= product.id %>">More info</a>
+<% end %>
