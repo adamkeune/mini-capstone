@@ -1,0 +1,29 @@
+<h1>Edit Title</h1>
+
+<form action="/products/<%= @product.id %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH" />
+  <p>Title: <input type="text" name="title" value="<%= @product.title %>" required></p>
+  <p>Author: <input type="text" name="author" value="<%= @product.author %>"></p>
+  <p>Description: <input type="text" name="description" value="<%= @product.description %>"></p>
+  <p>ISBN: <input type="text" name="isbn" value="<%= @product.isbn %>"></p>
+  <p>Price: <input type="number" name="price" value="<%= @product.price %>"></p>
+  <p>Image URLs: </p>
+  <p><input type="text" name="url" value="<%= @image.url %>"></p>
+  <p>Supplier: 
+    <select name="supplier_id" value="<%= @product.supplier.name %>">
+        <% @suppliers.each do |supplier| %>
+          <% if supplier.id == @product.supplier_id %>
+            <option value="<%= supplier.id %>" selected><%= supplier.name %></option>
+          <% else %>
+            <option value="<%= supplier.id %>"><%= supplier.name %></option>
+          <% end %>
+        <% end %>
+      </select>
+<!--     <select name="supplier_id" id="">
+    <% @suppliers.each do |supplier| %>
+      <option value="<%= supplier.id %>"><%= supplier.name %></option>
+    <% end %>
+    </select> -->
+  </p>
+  <input type="submit" name="" value="Update Book">
+</form>
