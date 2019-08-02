@@ -1,0 +1,22 @@
+body {
+  font-family: 'Arial', 'Calibri', sans-serif;
+  background-image: url('presence.png')
+}
+
+h1 {
+  color: white;
+}
+
+label {
+  color: white;
+}
+
+.navbar-brand {
+  font-family: 'Metamorphous', cursive;
+  font-size: 5em;
+}
+
+.container {
+  margin-top: 25px;
+}
+

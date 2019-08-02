@@ -41,7 +41,9 @@ class Api::ProductsController < ApplicationController
     })
 
     if @product.save
-      @product.images = Image.create(url: params["image_url"], product_id: @product.id)
+      if @product.image_url
+        Image.create(url: params["image_url"], product_id: @product.id)
+      end
       render "show.json.jb"
     else
       render json: { errors: @product.errors.full_messages }, status: 422
@@ -57,7 +59,9 @@ class Api::ProductsController < ApplicationController
     @product = Product.find_by(id: params["id"])
     @product.title = params["title"] || @product.title
     @product.author = params["author"] || @product.author
-    @product.images = Image.create(url: params["image_url"], product_id: @product.id) || @product.images
+    if @product.image_url
+      @product.images << Image.create(url: params["image_url"], product_id: @product.id)
+    end
     @product.description = params["description"] || @product.description
     @product.price = params["price"] || @product.price
     @product.supplier_id = params["supplier"] || @product.supplier_id

@@ -4,6 +4,7 @@
   author: product.author,
   isbn: product.isbn,
   images: product.images,
+  image_url: product.image_url,
   description: product.description,
   price: product.price,
   discounted: product.is_discounted?,
